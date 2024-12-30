@@ -6,7 +6,7 @@
 /*   By: abhimi <abhimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 15:21:33 by abhimi            #+#    #+#             */
-/*   Updated: 2024/12/30 12:04:36 by abhimi           ###   ########.fr       */
+/*   Updated: 2024/12/30 16:57:19 by abhimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,9 @@ void	ft_exec(char *cmd, char **envp)
 	{
 		pr_error("command not found", cmds[0]);
 		ft_free(cmds);
-		exit (127);
+		exit (1);
 	}
 	execve(path, cmds, envp);
 	ft_free(cmds);
+	exit(1);
 }
