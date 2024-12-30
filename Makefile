@@ -10,18 +10,18 @@ LIBFT = libft/libft.a
 all : $(NAME)
 
 $(NAME) : $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT)
 
 $(OBJ): %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 $(LIBFT):
-	make -C libft 
+	@make -C libft 
 clean :
-	rm -rf $(OBJ)
+	@rm -rf $(OBJ)
 
 fclean : clean
-	rm -rf $(NAME)
-	make fclean -C libft
+	@rm -rf $(NAME)
+	@make fclean -C libft
 
 re : fclean all 
 	

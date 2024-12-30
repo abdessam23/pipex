@@ -6,7 +6,7 @@
 /*   By: abhimi <abhimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 09:43:21 by abhimi            #+#    #+#             */
-/*   Updated: 2024/12/27 18:43:33 by abhimi           ###   ########.fr       */
+/*   Updated: 2024/12/30 11:48:09 by abhimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@
 
 char	*find_path(char *cmd, char **envp);
 void	ft_exec(char *cmd, char **envp);
-void	fterror(void);
+void	pr_error(char *msg, char *str);
 
 #endif

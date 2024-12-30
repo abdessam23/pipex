@@ -6,16 +6,32 @@
 /*   By: abhimi <abhimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 15:21:33 by abhimi            #+#    #+#             */
-/*   Updated: 2024/12/27 18:42:40 by abhimi           ###   ########.fr       */
+/*   Updated: 2024/12/30 12:04:36 by abhimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	fterror(void)
+void	pr_error(char *msg, char *str)
 {
-	perror("\033[31mError");
-	exit(EXIT_FAILURE);
+	ft_putstr_fd("Error: ", 2);
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd(":", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("\n", 2);
+}
+
+void	ft_free(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }
 
 char	*find_path(char *cmd, char **envp)
@@ -40,10 +56,7 @@ char	*find_path(char *cmd, char **envp)
 		free(path);
 		i++;
 	}
-	i = -1;
-	while (paths[++i])
-		free(paths[i]);
-	free (paths);
+	ft_free(paths);
 	return (NULL);
 }
 
@@ -51,9 +64,7 @@ void	ft_exec(char *cmd, char **envp)
 {
 	char	**cmds;
 	char	*path;
-	int		i;
 
-	i = 0;
 	cmds = ft_split(cmd, ' ');
 	if (access(cmds[0], X_OK) == 0)
 		path = cmds[0];
@@ -61,14 +72,10 @@ void	ft_exec(char *cmd, char **envp)
 		path = find_path(cmds[0], envp);
 	if (!path)
 	{
-		while (cmds[i])
-		{
-			free(cmds[i]);
-			i++;
-		}
-		free(cmds);
-		return ;
+		pr_error("command not found", cmds[0]);
+		ft_free(cmds);
+		exit (127);
 	}
-	if (execve(path, cmds, envp) == -1)
-		perror("execve faild");
+	execve(path, cmds, envp);
+	ft_free(cmds);
 }
