@@ -6,7 +6,7 @@
 /*   By: abhimi <abhimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 15:47:06 by abhimi            #+#    #+#             */
-/*   Updated: 2024/12/30 16:56:44 by abhimi           ###   ########.fr       */
+/*   Updated: 2025/01/01 13:55:47 by abhimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ void	ft_child_process(int *fd, char **argv, char **envp)
 
 	infile = open(argv[1], O_RDONLY);
 	if (infile == -1)
-	{
-		pr_error("No such file or directory","");
-		exit(1);
-	}
+		pr_error("No such file or directory", "");
 	dup2(fd[1], STDOUT_FILENO);
 	dup2(infile, STDIN_FILENO);
 	close(fd[0]);
@@ -34,10 +31,7 @@ void	ft_parent_process(int *fd, char **argv, char **envp)
 
 	outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (outfile == -1)
-	{
-		pr_error("permission","denied");
-		exit (1);
-	}
+		pr_error("permission", "denied");
 	dup2(fd[0], STDIN_FILENO);
 	dup2(outfile, STDOUT_FILENO);
 	close(fd[1]);
@@ -47,25 +41,24 @@ void	ft_parent_process(int *fd, char **argv, char **envp)
 int	main(int argc, char **argv, char **envp)
 {
 	pid_t	pid;
-	int	fd[2];
+	int		fd[2];
 
 	if (argc == 5)
 	{
 		if (pipe(fd) == -1)
-		{
-			pr_error("pipe failed","!");
-		}
+			pr_error("pipe failed", "!");
 		pid = fork();
 		if (pid < 0)
-			 pr_error("fork failed","!");
+			pr_error("fork failed", "!");
 		if (pid == 0)
 			ft_child_process(fd, argv, envp);
-	//	waitpid(-1, NULL, 0);
-		ft_parent_process(fd, argv, envp);
+		else
+		{
+			ft_parent_process(fd, argv, envp);
+			waitpid(pid, NULL, 0);
+		}
 	}
 	else
-	{
-		pr_error("bad argument","\nex: ./pipex infile cmd1 cmd2 outfile\n");
-	}
+		pr_error("bad argument", "\nex: ./pipex infile cmd1 cmd2 outfile\n");
 	return (0);
 }

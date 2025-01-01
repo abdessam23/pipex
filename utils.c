@@ -6,7 +6,7 @@
 /*   By: abhimi <abhimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 15:21:33 by abhimi            #+#    #+#             */
-/*   Updated: 2024/12/30 16:57:19 by abhimi           ###   ########.fr       */
+/*   Updated: 2025/01/01 14:12:23 by abhimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	pr_error(char *msg, char *str)
 	ft_putstr_fd(":", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd("\n", 2);
+	exit(1);
 }
 
 void	ft_free(char **str)
@@ -42,6 +43,8 @@ char	*find_path(char *cmd, char **envp)
 	char	*path;
 
 	i = 0;
+	if(!*envp)
+		return (NULL);
 	while (!(ft_strncmp(envp[i], "PATH=", 5) == 0))
 		i++;
 	paths = ft_split(envp[i] + 5, ':');
@@ -74,7 +77,6 @@ void	ft_exec(char *cmd, char **envp)
 	{
 		pr_error("command not found", cmds[0]);
 		ft_free(cmds);
-		exit (1);
 	}
 	execve(path, cmds, envp);
 	ft_free(cmds);
