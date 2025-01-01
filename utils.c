@@ -6,7 +6,7 @@
 /*   By: abhimi <abhimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 15:21:33 by abhimi            #+#    #+#             */
-/*   Updated: 2025/01/01 14:12:23 by abhimi           ###   ########.fr       */
+/*   Updated: 2025/01/01 16:10:50 by abhimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*find_path(char *cmd, char **envp)
 	char	*path;
 
 	i = 0;
-	if(!*envp)
+	if (!*envp)
 		return (NULL);
 	while (!(ft_strncmp(envp[i], "PATH=", 5) == 0))
 		i++;

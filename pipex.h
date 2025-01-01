@@ -6,7 +6,7 @@
 /*   By: abhimi <abhimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 09:43:21 by abhimi            #+#    #+#             */
-/*   Updated: 2025/01/01 14:37:01 by abhimi           ###   ########.fr       */
+/*   Updated: 2025/01/01 16:09:56 by abhimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ char	*ft_strdup(const char *s1);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c);
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
-
-
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

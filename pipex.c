@@ -6,7 +6,7 @@
 /*   By: abhimi <abhimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 15:47:06 by abhimi            #+#    #+#             */
-/*   Updated: 2025/01/01 13:55:47 by abhimi           ###   ########.fr       */
+/*   Updated: 2025/01/01 16:08:32 by abhimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_parent_process(int *fd, char **argv, char **envp)
 {
 	int	outfile;
 
-	outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (outfile == -1)
 		pr_error("permission", "denied");
 	dup2(fd[0], STDIN_FILENO);
